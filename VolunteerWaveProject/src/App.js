@@ -19,7 +19,7 @@ import EditMyPost from './pages/EditMyPost';
 const App = () => {
   return (
     <Provider store={store}>
-      <HashRouter basename="/">
+      {/* <HashRouter basename="/"> */}
         <div className='max-h-full'>
           <Routes>
             <Route path='/' element={<LandingPage />} />
@@ -37,7 +37,7 @@ const App = () => {
             <Route path='/EditMyPost/:id' element={<EditMyPost />} />
           </Routes>
         </div>
-      </HashRouter>
+      {/* </HashRouter> */}
     </Provider>
   );
 };
