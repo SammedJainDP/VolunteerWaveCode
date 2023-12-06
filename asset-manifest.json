@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/VolunteerWaveCode/static/css/main.c9ed2619.css",
-    "main.js": "/VolunteerWaveCode/static/js/main.cf41cbae.js",
+    "main.js": "/VolunteerWaveCode/static/js/main.13fe57cd.js",
     "static/js/787.16c6ee99.chunk.js": "/VolunteerWaveCode/static/js/787.16c6ee99.chunk.js",
     "index.html": "/VolunteerWaveCode/index.html",
     "main.c9ed2619.css.map": "/VolunteerWaveCode/static/css/main.c9ed2619.css.map",
-    "main.cf41cbae.js.map": "/VolunteerWaveCode/static/js/main.cf41cbae.js.map",
+    "main.13fe57cd.js.map": "/VolunteerWaveCode/static/js/main.13fe57cd.js.map",
     "787.16c6ee99.chunk.js.map": "/VolunteerWaveCode/static/js/787.16c6ee99.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9ed2619.css",
-    "static/js/main.cf41cbae.js"
+    "static/js/main.13fe57cd.js"
   ]
 }
