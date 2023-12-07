@@ -68,6 +68,8 @@ const Home = ({ events }) => {
             // Filter events where the TITLE matches sid and assign them to tempData
         }
 
+     
+
 
         // Return the filtered data
         return tempData;
@@ -144,6 +146,13 @@ const Home = ({ events }) => {
                     </div>
                 ))}
             </div>
+
+            {tempFilteredData.length === 0 && (
+                <div>
+                    <h2>No search results found</h2>
+                    {/* You can add additional UI or messages here */}
+                </div>
+            )}
 
         </div>
     );
