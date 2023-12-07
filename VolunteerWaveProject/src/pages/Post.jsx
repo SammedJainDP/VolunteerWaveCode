@@ -137,9 +137,29 @@ const VolunteerForm = () => {
     const { id, value } = e.target;
     setFormData({ ...formData, 'PHYSICAL_REQUIREMENT': value });
   };
+ 
   const handleInputChange1 = (e) => {
     const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+  
+    // Update nested fields by splitting the ID
+    const keys = id.split('.');
+    if (keys.length === 2) {
+      const [parentKey, childKey] = keys;
+  
+      setFormData({
+        ...formData,
+        [parentKey]: {
+          ...formData[parentKey],
+          [childKey]: value,
+        },
+      });
+    } else {
+      // Update non-nested fields
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    }
   };
 
 
@@ -276,16 +296,16 @@ const VolunteerForm = () => {
                 <div></div>
 
                 <label htmlFor="userId">&emsp; &nbsp;Name <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="NAME" value={formData.NAME} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.NAME" value={formData.CONTACT_DETAILS.NAME} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Email <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="EMAIL" value={formData.EMAIL} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.EMAIL" value={formData.CONTACT_DETAILS.EMAIL} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Phone <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="PHONE" value={formData.PHONE} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.PHONE" value={formData.CONTACT_DETAILS.PHONE} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Social Media Id:</label>
-                <input type="text" id="SOCIAL_MEDIA_ID" value={formData.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
+                <input type="text" id="CONTACT_DETAILS.SOCIAL_MEDIA_ID" value={formData.CONTACT_DETAILS.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
 
                 <label htmlFor="userId">ORGANIZED BY <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} required />
@@ -304,7 +324,7 @@ const VolunteerForm = () => {
               <div className="form-footer">
                 <div className='flex justify-center items-center'>
                   <Button className='flex justify-center items-center' type="submit" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }} variant="contained" > POST </Button>
-                  <Button className='flex justify-center items-center' type="submit" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }} variant="contained" > CANCEL </Button>
+                  {/* <Button className='flex justify-center items-center' type="button" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }} variant="contained" href='/Home/null'> CANCEL </Button> */}
                 </div>
               </div>
 

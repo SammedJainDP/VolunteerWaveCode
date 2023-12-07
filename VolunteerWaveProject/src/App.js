@@ -22,7 +22,7 @@ const App = () => {
       {/* <HashRouter basename="/"> */}
         <div className='max-h-full'>
           <Routes>
-            <Route path='/' element={<LandingPage />} />
+            <Route exact path='/' element={<LandingPage />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/SignUp' element={<SignUp />} />
             <Route path='/EditProfile' element={<EditProfile />} />

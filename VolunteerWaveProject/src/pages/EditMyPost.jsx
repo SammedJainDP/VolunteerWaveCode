@@ -75,6 +75,8 @@ const timeString = "08:00-22:00"; // Replace this with your time string
 const [startTime, endTime] = timeString.split("-");
 
 
+  
+
 
   const [formData, setFormData] = useState({
 
@@ -106,10 +108,36 @@ const [startTime, endTime] = timeString.split("-");
 
   const dispatch = useDispatch();
 
+
   const handleInputChange1 = (e) => {
     const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+  
+    // Update nested fields by splitting the ID
+    const keys = id.split('.');
+    if (keys.length === 2) {
+      const [parentKey, childKey] = keys;
+  
+      setFormData({
+        ...formData,
+        [parentKey]: {
+          ...formData[parentKey],
+          [childKey]: value,
+        },
+      });
+    } else {
+      // Update non-nested fields
+      setFormData({
+        ...formData,
+        [id]: value,
+      });
+    }
   };
+   
+
+  // const handleInputChange1 = (e) => {
+  //   const { id, value } = e.target;
+  //   setFormData({ ...formData, [id]: value });
+  // };
   const handleRadioChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, 'TEACHING': value });
@@ -269,16 +297,16 @@ const [startTime, endTime] = timeString.split("-");
                 <div></div>
 
                 <label htmlFor="userId">&emsp; &nbsp;Name <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="NAME" value={formData.CONTACT_DETAILS.NAME} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.NAME" value={formData.CONTACT_DETAILS.NAME} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Email <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="EMAIL" value={formData.CONTACT_DETAILS.EMAIL} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.EMAIL" value={formData.CONTACT_DETAILS.EMAIL} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Phone <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="PHONE" value={formData.CONTACT_DETAILS.PHONE} onChange={handleInputChange1} required />
+                <input type="text" id="CONTACT_DETAILS.PHONE" value={formData.CONTACT_DETAILS.PHONE} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">&emsp; &nbsp;Social Media Id:</label>
-                <input type="text" id="SOCIAL_MEDIA_ID" value={formData.CONTACT_DETAILS.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
+                <input type="text" id="CONTACT_DETAILS.SOCIAL_MEDIA_ID" value={formData.CONTACT_DETAILS.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
 
                 <label htmlFor="userId">ORGANIZED BY <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} required />
