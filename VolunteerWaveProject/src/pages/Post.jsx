@@ -12,17 +12,17 @@ import Dialog from '@mui/material/Dialog';
 
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
-
+import backgroundImage from '../images/bg.jpeg';
 import Typography from '@mui/material/Typography';
 
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
@@ -30,18 +30,18 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 const VolunteerForm = () => {
 
   const [open, setOpen] = React.useState(false);
- 
+
 
   const handleOpen = (e) => {
 
-      setOpen(true);
-      e.preventDefault();
+    setOpen(true);
+    e.preventDefault();
   };
 
   const handleClose = () => {
 
-      setOpen(false);
-      handleSubmit();
+    setOpen(false);
+    handleSubmit();
   };
 
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ const VolunteerForm = () => {
   // const eventData = useSelector((state) => state.eventReducer?.eventData);
 
   const handleSubmit = (e) => {
-   
+
 
     // const updatetedData=[...eventData,formData];
     dispatch(AddEvent(formData));
@@ -115,7 +115,17 @@ const VolunteerForm = () => {
 
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh', // Ensure the background covers the entire viewport
+        // Other styles for your content
+      }}
+    >
       <Header2 />
 
       <div>
@@ -181,20 +191,20 @@ const VolunteerForm = () => {
                 <label htmlFor="userId">CONTACT DETAILS</label>
                 <div></div>
 
-                <label htmlFor="userId">Name <span style={{ color: "red" }}>*</span></label>
+                <label htmlFor="userId">&emsp; &nbsp;Name <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="NAME" value={formData.NAME} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Email <span style={{ color: "red" }}>*</span></label>
+                <label htmlFor="userId">&emsp; &nbsp;Email <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="EMAIL" value={formData.EMAIL} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Phone <span style={{ color: "red" }}>*</span></label>
+                <label htmlFor="userId">&emsp; &nbsp;Phone <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="PHONE" value={formData.PHONE} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Social Media Id:</label>
+                <label htmlFor="userId">&emsp; &nbsp;Social Media Id:</label>
                 <input type="text" id="SOCIAL_MEDIA_ID" value={formData.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
 
                 <label htmlFor="userId">ORGANIZED BY <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} />
+                <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">PERKS</label>
                 <input type="text" id="PERKS" value={formData.PERKS} onChange={handleInputChange1} />
@@ -220,39 +230,46 @@ const VolunteerForm = () => {
         </div>
       </div>
       <BootstrapDialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Post created successfully !!
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Post created successfully !!
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose(); }}> Okay </Button>
 
-                           
 
-                            {/* <Button autoFocus onClick={handleClose}>
+
+          {/* <Button autoFocus onClick={handleClose}>
             Confirm
           </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
+        </DialogActions>
+      </BootstrapDialog>
     </div>
   );
 };

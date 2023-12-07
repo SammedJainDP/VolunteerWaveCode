@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { AddMyEvent } from '../Redux/Actions';
-
+import backgroundImage from '../images/bg.jpeg';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 
@@ -24,10 +24,10 @@ const MAX_DESCRIPTION_WIDTH = 35;
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
@@ -55,22 +55,22 @@ function formatDescription(description) {
   ));
 }
 
-const LandingPage = ({events}) => {
+const LandingPage = ({ events }) => {
 
   const [open, setOpen] = React.useState(false);
- 
 
-    const handleOpen = () => {
 
-        setOpen(true);
+  const handleOpen = () => {
 
-    };
+    setOpen(true);
 
-    const handleClose = () => {
+  };
 
-        setOpen(false);
-RegisterEvent();
-    };
+  const handleClose = () => {
+
+    setOpen(false);
+    RegisterEvent();
+  };
 
   const { id } = useParams();
   const userData = events.find(event => event.TITLE === id);
@@ -79,22 +79,32 @@ RegisterEvent();
   const navigate = useNavigate();
 
   const RegisterEvent = (e) => {
-    
-   
-        dispatch(AddMyEvent(userData));
-        navigate('/MyEvents');
-       
-      
-    
-  
-}
+
+
+    dispatch(AddMyEvent(userData));
+    navigate('/MyEvents');
+
+
+
+
+  }
 
 
 
 
   return (
 
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh', // Ensure the background covers the entire viewport
+        // Other styles for your content
+      }}
+    >
 
       {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
       <Header2 />
@@ -204,39 +214,46 @@ RegisterEvent();
 
       </div>
       <BootstrapDialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Registration successful !!
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Registration successful !!
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose(); }}> Okay </Button>
 
-                           
 
-                            {/* <Button autoFocus onClick={handleClose}>
+
+          {/* <Button autoFocus onClick={handleClose}>
             Confirm
           </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
+        </DialogActions>
+      </BootstrapDialog>
 
     </div>
 

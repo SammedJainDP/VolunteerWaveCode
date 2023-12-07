@@ -4,9 +4,10 @@ import Header2 from '../CommonComponents/Header2';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import backgroundImage from '../images/bg.jpeg';
 
 
-const MAX_DESCRIPTION_WIDTH = 70; // Maximum characters per line for description
+const MAX_DESCRIPTION_WIDTH = 130; // Maximum characters per line for description
 
 function formatDescription(description) {
     const words = description.split(' ');
@@ -32,55 +33,65 @@ function formatDescription(description) {
     ));
 }
 
-const Home = ({events}) => {
-  
+const Home = ({ events }) => {
+
     const { sid } = useParams();
 
-   
-  
-    
+
+
+
     const filterData = () => {
         // Create an empty array to store the filtered data
         let tempData = [];
-    let sidTemp=sid.replace(/%20/g, ' ');
-    
+        let sidTemp = sid.replace(/%20/g, ' ');
+
         // Use Array.prototype.filter() to filter the events based on conditions
         if (sidTemp === "null") {
             tempData = events; // Assign all events if sid is "null"
-        } else if(sidTemp === "age40plus"){
-            tempData=events.filter((userData) => /^[4-9][0-9]/.test(userData.AGE));
+        } else if (sidTemp === "age40plus") {
+            tempData = events.filter((userData) => /^[4-9][0-9]/.test(userData.AGE));
         }
-        else if(sidTemp === "age40minus"){
-            tempData=events.filter((userData) => /^(?:[0-3]?\d|[1-3]\d{2}|[1-9])(?![0-9])/u.test(userData.AGE));
+        else if (sidTemp === "age40minus") {
+            tempData = events.filter((userData) => /^(?:[0-3]?\d|[1-3]\d{2}|[1-9])(?![0-9])/u.test(userData.AGE));
         }
-        else if(sidTemp === "physical"){
-            tempData=events.filter((userData) => userData.PHYSICAL_REQUIREMENT.toUpperCase() === "YES");
+        else if (sidTemp === "physical") {
+            tempData = events.filter((userData) => userData.PHYSICAL_REQUIREMENT.toUpperCase() === "YES");
         }
-        else if(sidTemp === "perks"){
-            tempData=events.filter((userData) => userData.PERKS.toUpperCase() !== "");
+        else if (sidTemp === "perks") {
+            tempData = events.filter((userData) => userData.PERKS.toUpperCase() !== "");
         }
-        else if(sidTemp === "teaching"){
-            tempData=events.filter((userData) => userData.TEACHING.toUpperCase() === "YES");
+        else if (sidTemp === "teaching") {
+            tempData = events.filter((userData) => userData.TEACHING.toUpperCase() === "YES");
         }
-            else{
+        else {
             tempData = events.filter((userData) => userData.TITLE.toUpperCase().includes(sidTemp.toUpperCase()));
             // Filter events where the TITLE matches sid and assign them to tempData
         }
-        
-    
+
+
         // Return the filtered data
         return tempData;
-    
+
     };
-    const tempFilteredData=filterData();
+    const tempFilteredData = filterData();
 
     return (
-        
-        <div>
+
+        <div
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh', // Ensure the background covers the entire viewport
+                // Other styles for your content
+            }}
+        >
 
             {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
             <Header2 />
-            <div style={{height:'90px'}}>   </div>
+            <div style={{ height: '90px' }}>   </div>
 
 
             <div style={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column', flexWrap: 'wrap' }}>
@@ -88,7 +99,7 @@ const Home = ({events}) => {
                     <div
                         key={index}
                         style={{
-                            width: '60%',
+                            width: '95%',
                             height: 'auto',
                             margin: '20px',
                             padding: '20px',
@@ -98,37 +109,37 @@ const Home = ({events}) => {
                         }}
                     >
                         <Link to={`/OnClickData/${userData.TITLE}`}>
-                        <h2 style={{ textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em', textAlign: 'left' }}>
-                            <u>{userData.TITLE.toUpperCase()}</u>
-                        </h2>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr' }}>
-                        
-                            <p>
-                                DATE
-                            </p>
-                            <p>: {userData.DATE}
-                            </p>
-                            <p>
-                                TIME SLOTS
-                            </p>
-                            <p>
-                                : {userData.TIME_SLOTS}
-                            </p>
-                            <p>
-                                LOCATION
-                            </p>
-                            <p>: {userData.LOCATION}
-                            </p>
-                            <p>AGE</p>
-                            <p>: {userData.AGE}</p>
-                            <p>DESCRIPTION</p>
-                            <p>: {formatDescription(userData.DESCRIPTION)}</p>
-                            <p>TEACHING </p>
-                            <p>: {userData.TEACHING}</p>
-                            <p>PHYSICAL REQUIREMENT</p>
-                            <p>: {userData.PHYSICAL_REQUIREMENT}</p>
+                            <h2 style={{ textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em', textAlign: 'left' }}>
+                                <u>{userData.TITLE.toUpperCase()}</u>
+                            </h2>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr' }}>
 
-                        </div>
+                                <p>
+                                    DATE
+                                </p>
+                                <p>: {userData.DATE}
+                                </p>
+                                <p>
+                                    TIME SLOTS
+                                </p>
+                                <p>
+                                    : {userData.TIME_SLOTS}
+                                </p>
+                                <p>
+                                    LOCATION
+                                </p>
+                                <p>: {userData.LOCATION}
+                                </p>
+                                <p>AGE</p>
+                                <p>: {userData.AGE}</p>
+                                <p>DESCRIPTION</p>
+                                <p>: {formatDescription(userData.DESCRIPTION)}</p>
+                                <p>TEACHING </p>
+                                <p>: {userData.TEACHING}</p>
+                                <p>PHYSICAL REQUIREMENT</p>
+                                <p>: {userData.PHYSICAL_REQUIREMENT}</p>
+
+                            </div>
                         </Link>
                     </div>
                 ))}
@@ -139,8 +150,8 @@ const Home = ({events}) => {
 };
 const mapStateToProps = (state) => ({
     events: state.events,
-  });
-  
+});
+
 export default connect(mapStateToProps)(Home);
 
 

@@ -15,6 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 
 import Typography from '@mui/material/Typography';
+import backgroundImage from '../images/bg.jpeg';
 
 
 
@@ -29,94 +30,107 @@ import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
-const EditMyPost = ({someData})=>{
+const EditMyPost = ({ someData }) => {
 
   const [open, setOpen] = React.useState(false);
- 
+
 
   const handleOpen = (e) => {
 
-      setOpen(true);
-      e.preventDefault();
+    setOpen(true);
+    e.preventDefault();
   };
 
   const handleClose = () => {
 
-      setOpen(false);
-      HandleSubmit();
+    setOpen(false);
+    HandleSubmit();
   };
 
-    const { id } = useParams();
-    
-
-    const userData = someData[id];
-    const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
-       
-        
+  const { id } = useParams();
 
 
-        TITLE:userData.TITLE ,
-        DATE:userData.DATE ,
-        TIME_SLOTS:userData.TIME_SLOTS ,
-        LOCATION: userData.LOCATION,
-        AGE:userData.AGE ,
-        DESCRIPTION:userData.DESCRIPTION ,
-        TEACHING:userData.TEACHING,
-        PHYSICAL_REQUIREMENT:userData.PHYSICAL_REQUIREMENT,
-        CONTACT_DETAILS: {
-          NAME: userData.CONTACT_DETAILS.NAME,
-          EMAIL: userData.CONTACT_DETAILS.EMAIL,
-          PHONE: userData.CONTACT_DETAILS.PHONE,
-          SOCIAL_MEDIA_ID:userData.CONTACT_DETAILS.SOCIAL_MEDIA_ID,
-        },
-        ORGANIZED_BY:userData.ORGANIZED_BY ,
-        PERKS:userData.PERKS,
-      });
+  const userData = someData[id];
+  const navigate = useNavigate();
+  const dateParsed = new Date(userData.DATE);
+  const dateString = dateParsed.toISOString().split('T')[0];
 
-     
+  const [formData, setFormData] = useState({
 
-      const dispatch = useDispatch();
 
-      const handleInputChange1 = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-      };
-      const handleRadioChange = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, 'TEACHING': value });
-      };
-      const handleRadioChange1 = (e) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, 'PHYSICAL_REQUIREMENT': value });
-      };
-      const HandleSubmit = () => {
-        
-        
-    
-        // const updatetedData=[...eventData,formData];
-        dispatch(deletePost(formData.TITLE));
-        dispatch(AddMyPosts(formData));
-        dispatch(deletePostHome(formData.TITLE));
-        dispatch(AddEvent(formData));
 
-        navigate('/MyPosts');
-        // Reset the form data after submission
-    
-      };
 
-return(
-<div>
-    <Header2/>
-    <div>
+    TITLE: userData.TITLE,
+    DATE: dateString,
+    TIME_SLOTS: userData.TIME_SLOTS,
+    LOCATION: userData.LOCATION,
+    AGE: userData.AGE,
+    DESCRIPTION: userData.DESCRIPTION,
+    TEACHING: userData.TEACHING,
+    PHYSICAL_REQUIREMENT: userData.PHYSICAL_REQUIREMENT,
+    CONTACT_DETAILS: {
+      NAME: userData.CONTACT_DETAILS.NAME,
+      EMAIL: userData.CONTACT_DETAILS.EMAIL,
+      PHONE: userData.CONTACT_DETAILS.PHONE,
+      SOCIAL_MEDIA_ID: userData.CONTACT_DETAILS.SOCIAL_MEDIA_ID,
+    },
+    ORGANIZED_BY: userData.ORGANIZED_BY,
+    PERKS: userData.PERKS,
+  });
+
+
+
+  const dispatch = useDispatch();
+
+  const handleInputChange1 = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+  const handleRadioChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, 'TEACHING': value });
+  };
+  const handleRadioChange1 = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, 'PHYSICAL_REQUIREMENT': value });
+  };
+  const HandleSubmit = () => {
+
+
+
+    // const updatetedData=[...eventData,formData];
+    dispatch(deletePost(formData.TITLE));
+    dispatch(AddMyPosts(formData));
+    dispatch(deletePostHome(formData.TITLE));
+    dispatch(AddEvent(formData));
+
+    navigate('/MyPosts');
+    // Reset the form data after submission
+
+  };
+
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'contain', // Change to 'contain'
+        backgroundRepeat: 'repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        zIndex: '0',
+        // Other styles for your content
+      }}
+    >
+      <Header2 />
+      <div>
         <div className="flex justify-center items-center ">
           <div className="form-container">
             <Link to="/MyPosts">
@@ -127,23 +141,23 @@ return(
 
               <div className="input-group justify-center" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '10px', alignItems: 'center' }}>
                 <label htmlFor="title">TITLE <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="TITLE" value={formData.TITLE} onChange={handleInputChange1} required readOnly/>
+                <input type="text" id="TITLE" value={formData.TITLE} onChange={handleInputChange1} required readOnly />
 
                 <label htmlFor="userId">DATE <span style={{ color: "red" }}>*</span></label>
-                <input type="DATE" id="DATE" value={formData.DATE} onChange={handleInputChange1} required/>
+                <input type="DATE" id="DATE" value={formData.DATE} onChange={handleInputChange1} required />
 
                 <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
                 <div>
-                  <input type="text" id="TIME_SLOTS" value={formData.TIME_SLOTS} onChange={handleInputChange1}  required/>
+                  <input type="text" id="TIME_SLOTS" value={formData.TIME_SLOTS} onChange={handleInputChange1} required />
                   {/* <input style={{width:'100px', fontSize:'12px'}} type="time" id="toTime" value={formData.toTime} onChange={(e) => handleInputChange(e, 'toTime')} /> */}
                 </div>
 
                 <label htmlFor="userId">LOCATION <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="LOCATION" value={formData.LOCATION} onChange={handleInputChange1}  required/>
+                <input type="text" id="LOCATION" value={formData.LOCATION} onChange={handleInputChange1} required />
 
                 <label htmlFor="password">AGE<span style={{ color: "red" }}>*</span></label>
                 {/* <div> */}
-                <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required/>
+                <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required />
                 {/* <input style={{width:'100px'}} type="number" id="AGE" value={formData.AGE} onChange={mergeAgesAndStore} />  */}
                 {/* </div> */}
 
@@ -179,20 +193,20 @@ return(
                 <label htmlFor="userId">CONTACT DETAILS</label>
                 <div></div>
 
-                <label htmlFor="userId">Name <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="NAME" value={formData.CONTACT_DETAILS.NAME} onChange={handleInputChange1} required/>
+                <label htmlFor="userId">&emsp; &nbsp;Name <span style={{ color: "red" }}>*</span></label>
+                <input type="text" id="NAME" value={formData.CONTACT_DETAILS.NAME} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Email <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="EMAIL" value={formData.CONTACT_DETAILS.EMAIL} onChange={handleInputChange1} required/>
+                <label htmlFor="userId">&emsp; &nbsp;Email <span style={{ color: "red" }}>*</span></label>
+                <input type="text" id="EMAIL" value={formData.CONTACT_DETAILS.EMAIL} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Phone <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="PHONE" value={formData.CONTACT_DETAILS.PHONE} onChange={handleInputChange1} required/>
+                <label htmlFor="userId">&emsp; &nbsp;Phone <span style={{ color: "red" }}>*</span></label>
+                <input type="text" id="PHONE" value={formData.CONTACT_DETAILS.PHONE} onChange={handleInputChange1} required />
 
-                <label htmlFor="userId">Social Media Id:</label>
+                <label htmlFor="userId">&emsp; &nbsp;Social Media Id:</label>
                 <input type="text" id="SOCIAL_MEDIA_ID" value={formData.CONTACT_DETAILS.SOCIAL_MEDIA_ID} onChange={handleInputChange1} />
 
                 <label htmlFor="userId">ORGANIZED BY <span style={{ color: "red" }}>*</span></label>
-                <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} required/>
+                <input type="text" id="ORGANIZED_BY" value={formData.ORGANIZED_BY} onChange={handleInputChange1} required />
 
                 <label htmlFor="userId">PERKS</label>
                 <input type="text" id="PERKS" value={formData.PERKS} onChange={handleInputChange1} />
@@ -203,7 +217,7 @@ return(
               <div className="form-footer">
                 <div className='flex justify-center items-center'>
                   <Button className='flex justify-center items-center' type="submit" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }} variant="contained" > EDIT </Button>
-                  
+
                 </div>
               </div>
 
@@ -214,46 +228,53 @@ return(
       </div>
 
       <BootstrapDialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Post edited successfully !!
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Post edited successfully !!
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose(); }}>
 
-                           
+            Okay </Button>
 
-                            {/* <Button autoFocus onClick={handleClose}>
-            Confirm
-          </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
 
-</div>
-);
+
+
+        </DialogActions>
+      </BootstrapDialog>
+
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
-    someData: state.myPosts,
-  });
+  someData: state.myPosts,
+});
 
-  export default connect(mapStateToProps)(EditMyPost);
+export default connect(mapStateToProps)(EditMyPost);

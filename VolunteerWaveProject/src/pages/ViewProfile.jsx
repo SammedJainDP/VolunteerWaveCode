@@ -1,17 +1,12 @@
 import React from 'react';
-import eventData from '../Data/EventData';
-import { useParams } from 'react-router-dom';
 import Header2 from '../CommonComponents/Header2';
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from '@mui/material';
 import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { AddMyEvent } from '../Redux/Actions';
 import Tooltip from '@mui/material/Tooltip';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-
-
-
+import backgroundImage from '../images/bg.jpeg';
 
 const MAX_DESCRIPTION_WIDTH = 35;
 
@@ -52,7 +47,17 @@ const ViewProfile = ({ events }) => {
 
     return (
 
-        <div>
+        <div
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh', // Ensure the background covers the entire viewport
+                // Other styles for your content
+            }}
+        >
 
             {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 
@@ -106,11 +111,11 @@ const ViewProfile = ({ events }) => {
                             <div>
                                 <div>
 
-                                    <h2 style={{ fontFamily: 'Inter-Bold Helvetica', fontWeight: '700', color: '#125da8', fontSize: '36px', textAlign: 'center', }}>
+                                    <h2 style={{ fontFamily: '"Inter-Bold", Helvetica, sans-serif', fontWeight: '700', color: '#125da8', fontSize: '36px', textAlign: 'center', }}>
                                         VIEW PROFILE
                                     </h2>
                                 </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr', rowGap:'15px', columnGap:'40px'}}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr', rowGap: '15px', columnGap: '40px' }}>
 
 
                                     <p>

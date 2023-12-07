@@ -12,33 +12,34 @@ import Dialog from '@mui/material/Dialog';
 
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import backgroundImage from '../images/bg.jpeg';
 
 import Typography from '@mui/material/Typography';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
 const EditProfile = ({ events }) => {
 
   const [open, setOpen] = React.useState(false);
- 
+
 
   const handleOpen = (e) => {
 
-      setOpen(true);
-      e.preventDefault();
+    setOpen(true);
+    e.preventDefault();
   };
 
   const handleClose = () => {
 
-      setOpen(false);
-      HandleSubmit();
+    setOpen(false);
+    HandleSubmit();
   };
 
   const userData = events[0];
@@ -61,8 +62,8 @@ const EditProfile = ({ events }) => {
   };
 
   const HandleSubmit = () => {
-  
-    
+
+
 
     // const updatetedData=[...eventData,formData];
 
@@ -76,7 +77,17 @@ const EditProfile = ({ events }) => {
 
   // const logo = `${process.env.PUBLIC_URL}/logo.png`;
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh', // Ensure the background covers the entire viewport
+        // Other styles for your content
+      }}
+    >
       <Header2 />
 
 
@@ -86,17 +97,17 @@ const EditProfile = ({ events }) => {
             <button className="close-button">X</button>
           </Link>
           <form onSubmit={handleOpen}>
-            <h2 className='signup-text' style={{ fontFamily: 'Inter-Bold Helvetica', fontWeight: '700', color: '#125da8', fontSize: '36px', textAlign: 'center', }}>EDIT PROFILE</h2>
+            <h2 className='signup-text' style={{ fontFamily: '"Inter-Bold", Helvetica, sans-serif', fontWeight: '700', color: '#125da8', fontSize: '36px', textAlign: 'center', }}>EDIT PROFILE</h2>
 
-            <div className="input-group " style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', rowGap: '5px',justifyItems:'center' }}>
-              <label  htmlFor="userId">First Name</label>
-              <input type="text" id="FIRST_NAME" value={formData.FIRST_NAME} onChange={handleInputChange1} />
+            <div className="input-group " style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', rowGap: '5px', justifyItems: 'center' }}>
+              <label htmlFor="userId">First Name<span style={{ color: "red" }}>*</span></label>
+              <input type="text" id="FIRST_NAME" value={formData.FIRST_NAME} onChange={handleInputChange1} required />
 
-              <label htmlFor="userId">Last Name</label>
-              <input type="text" id="LAST_NAME" value={formData.LAST_NAME} onChange={handleInputChange1} />
+              <label htmlFor="userId">Last Name<span style={{ color: "red" }}>*</span></label>
+              <input type="text" id="LAST_NAME" value={formData.LAST_NAME} onChange={handleInputChange1} required />
 
-              <label   htmlFor="userId">Email Id</label>
-              <input type="text" id="EMAIL_ID" value={formData.EMAIL_ID} onChange={handleInputChange1} />
+              <label htmlFor="userId">Email Id<span style={{ color: "red" }}>*</span></label>
+              <input type="text" id="EMAIL_ID" value={formData.EMAIL_ID} onChange={handleInputChange1} required />
 
               <label htmlFor="userId">Age</label>
               <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} />
@@ -118,39 +129,46 @@ const EditProfile = ({ events }) => {
         </div>
       </div>
       <BootstrapDialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Profile edited successfully !!
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Profile edited successfully !!
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose(); }}> Okay </Button>
 
-                           
 
-                            {/* <Button autoFocus onClick={handleClose}>
+
+          {/* <Button autoFocus onClick={handleClose}>
             Confirm
           </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
+        </DialogActions>
+      </BootstrapDialog>
     </div>
 
   );

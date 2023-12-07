@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { deletePost, deletePostHome } from '../Redux/Actions';
 import { useDispatch } from 'react-redux';
 
-
+import backgroundImage from '../images/bg.jpeg';
 
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -67,7 +67,7 @@ const MyPosts = ({ events }) => {
 
 
     const handleOpen = (title) => {
-setTitle(title);
+        setTitle(title);
         setOpen(true);
 
     };
@@ -82,7 +82,7 @@ setTitle(title);
 
 
     const deleteHandler = () => {
-handleClose();
+        handleClose();
         dispatch(deletePost(title));
         dispatch(deletePostHome(title));
 
@@ -114,7 +114,17 @@ handleClose();
     // };
 
     return (
-        <div>
+        <div
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh', // Ensure the background covers the entire viewport
+                // Other styles for your content
+            }}
+        >
 
             {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
             <Header2 />
@@ -188,15 +198,18 @@ handleClose();
                             <div className='flex items-center float-right '>
 
                                 <Link to={`/EditMyPost/${index}`} >
-                                    <Tooltip
-                                        title="Edit"
-                                        arrow
-                                        placement="left"
-                                        enterDelay={100}
-                                        leaveDelay={100}
-                                    >
-                                        <EditIcon style={{ fontSize: 30, color: '#313131', marginRight: '20px' }} />
-                                    </Tooltip>
+                                    <Button>
+                                        <Tooltip
+                                            title="Edit"
+                                            arrow
+                                            placement="left"
+                                            enterDelay={100}
+                                            leaveDelay={100}
+                                        >
+                                            <EditIcon style={{ fontSize: 30, color: '#313131', marginRight: '20px' }} />
+                                        </Tooltip>
+
+                                    </Button>
                                 </Link>
                             </div>
                         </div>
@@ -221,7 +234,14 @@ handleClose();
                                 Are you sure you want to delete the post?
                             </Typography>
                         </DialogContent>
-                        <DialogActions>
+                        <DialogActions
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                paddingBottom: '16px', // Add padding if needed
+                            }}
+                        >
 
                             <Button autofocus className='flex justify-center items-center'
                                 type="submit"

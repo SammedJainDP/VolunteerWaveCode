@@ -5,6 +5,7 @@ import Header2 from '../CommonComponents/Header2';
 import { Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
+import backgroundImage from '../images/bg.jpeg';
 
 
 const MAX_DESCRIPTION_WIDTH = 35;
@@ -33,7 +34,7 @@ function formatDescription(description) {
   ));
 }
 
-const LandingPage = ({events}) => {
+const LandingPage = ({ events }) => {
 
   const { id } = useParams();
   const userData = events[id];
@@ -44,7 +45,17 @@ const LandingPage = ({events}) => {
 
   return (
 
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh', // Ensure the background covers the entire viewport
+        // Other styles for your content
+      }}
+    >
 
       {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
       <Header2 />

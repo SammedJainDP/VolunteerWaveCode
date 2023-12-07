@@ -35,11 +35,11 @@ let eventData = [
         SOCIAL_MEDIA_ID: '@Yep',
       },
       ORGANIZED_BY: 'Harbor point management',
-      PERKS: 'None',
+      PERKS: '',
     },
     {
       TITLE: 'COLLEGE FEST',
-      DATE: '27/11/2023',
+      DATE: '11/27/2023',
       TIME_SLOTS: '08:00 AM - 06:00 PM',
       LOCATION: 'UMASS BOSTON',
       AGE: '25 -50 Yrs',
@@ -53,7 +53,7 @@ let eventData = [
         SOCIAL_MEDIA_ID: '@GeoBai',
       },
       ORGANIZED_BY: 'SAEC',
-      PERKS: 'None',
+      PERKS: '',
     },
     {
       TITLE: 'Friendly Voice Volunteer Caller',
@@ -71,11 +71,11 @@ let eventData = [
         SOCIAL_MEDIA_ID: '@GeoBai',
       },
       ORGANIZED_BY: 'SAEC',
-      PERKS: 'None',
+      PERKS: '',
     },
     {
       TITLE: 'READING TUTOR',
-      DATE: '04/11/2023',
+      DATE: '11/11/2023',
       TIME_SLOTS: '09:00 AM - 12:00 PM',
       LOCATION: 'REMOTE',
       AGE: '40 -75 Yrs',
@@ -89,11 +89,11 @@ let eventData = [
         SOCIAL_MEDIA_ID: '@shal01',
       },
       ORGANIZED_BY: 'Paul school',
-      PERKS: 'None',
+      PERKS: '',
     },
     {
       TITLE: 'College Sports Festival',
-      DATE: '28/12/2023',
+      DATE: '12/28/2023',
       TIME_SLOTS: '11:00 AM - 02:00 AM',
       LOCATION: 'UMASS LOWAL',
       AGE: '40 -65 Yrs',
@@ -125,7 +125,7 @@ let eventData = [
         SOCIAL_MEDIA_ID: '@Paul',
       },
       ORGANIZED_BY: 'Red Cross',
-      PERKS: 'None',
+      PERKS: '',
     },];
 
     export default eventData;

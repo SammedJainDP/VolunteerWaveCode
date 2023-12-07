@@ -14,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 
 import Typography from '@mui/material/Typography';
+import backgroundImage from '../images/bg.jpeg';
 
 
 const MAX_DESCRIPTION_WIDTH = 70;
@@ -59,7 +60,7 @@ const MyEvents = ({ events }) => {
     const [indexDelete, setIndex] = React.useState(0);
 
     const handleOpen = (index) => {
-setIndex(index);
+        setIndex(index);
         setOpen(true);
 
     };
@@ -74,73 +75,83 @@ setIndex(index);
     const dispatch = useDispatch();
 
     const cancelRegistrationHandler = () => {
-       handleClose();
+        handleClose();
         dispatch(cancelRegistration(indexDelete));
-    
+
     }
-  
+
 
 
     return (
-        <div>
+        <div
+            style={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '100vh', // Ensure the background covers the entire viewport
+                // Other styles for your content
+            }}
+        >
 
             {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
             <Header2 />
             <div style={{ height: '90px' }}>   </div>
             <h1 className='flex justify-center' style={{ fontWeight: 'bold', fontSize: '40px', textDecoration: 'None' }}>My Events</h1>
 
-            
-                {events.map((userData, index) => (userData && (
-                    <div>
 
-                        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
-                    <div
-                        key={index}
-                        style={{
-                            width: '60%',
-                            height: 'auto',
-                            margin: '20px',
-                            padding: '20px',
-                            border: '1px solid #ccc',
-                            borderRadius: '8px',
-                            background: '#D5F0F8',
-                        }}
-                    >
-                        <Link to={`/MyEventsDisplay/${index}`}>
-                            <h2 style={{ textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em', textAlign: 'left' }}>
-                                <u>{userData.TITLE.toUpperCase()}</u>
-                            </h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr' }}>
+            {events.map((userData, index) => (userData && (
+                <div>
 
-                                <p>
-                                    DATE
-                                </p>
-                                <p>: {userData.DATE}
-                                </p>
-                                <p>
-                                    TIME SLOTS
-                                </p>
-                                <p>
-                                    : {userData.TIME_SLOTS}
-                                </p>
-                                <p>
-                                    LOCATION
-                                </p>
-                                <p>: {userData.LOCATION}
-                                </p>
-                                <p>AGE</p>
-                                <p>: {userData.AGE}</p>
-                                <p>DESCRIPTION</p>
-                                <p>: {formatDescription(userData.DESCRIPTION)}</p>
-                                <p>TEACHING </p>
-                                <p>: {userData.TEACHING}</p>
-                                <p>PHYSICAL REQUIREMENT</p>
-                                <p>: {userData.PHYSICAL_REQUIREMENT}</p>
+                    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', flexWrap: 'wrap' }}>
+                        <div
+                            key={index}
+                            style={{
+                                width: '60%',
+                                height: 'auto',
+                                margin: '20px',
+                                padding: '20px',
+                                border: '1px solid #ccc',
+                                borderRadius: '8px',
+                                background: '#D5F0F8',
+                            }}
+                        >
+                            <Link to={`/MyEventsDisplay/${index}`}>
+                                <h2 style={{ textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em', textAlign: 'left' }}>
+                                    <u>{userData.TITLE.toUpperCase()}</u>
+                                </h2>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'auto 2fr' }}>
 
-                            </div>
-                        </Link>
-                        <Button className='flex justify-center items-center' type="button" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "10px", fontWeight: "Bold", float: 'right', marginRight: "10px", marginTop: "2px", width: "160px" }} variant="contained" onClick={() => {handleOpen(index);}}> Cancel Registration </Button>
-                    </div>
+                                    <p>
+                                        DATE
+                                    </p>
+                                    <p>: {userData.DATE}
+                                    </p>
+                                    <p>
+                                        TIME SLOTS
+                                    </p>
+                                    <p>
+                                        : {userData.TIME_SLOTS}
+                                    </p>
+                                    <p>
+                                        LOCATION
+                                    </p>
+                                    <p>: {userData.LOCATION}
+                                    </p>
+                                    <p>AGE</p>
+                                    <p>: {userData.AGE}</p>
+                                    <p>DESCRIPTION</p>
+                                    <p>: {formatDescription(userData.DESCRIPTION)}</p>
+                                    <p>TEACHING </p>
+                                    <p>: {userData.TEACHING}</p>
+                                    <p>PHYSICAL REQUIREMENT</p>
+                                    <p>: {userData.PHYSICAL_REQUIREMENT}</p>
+
+                                </div>
+                            </Link>
+                            <Button className='flex justify-center items-center' type="button" style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "10px", fontWeight: "Bold", float: 'right', marginRight: "10px", marginTop: "2px", width: "160px" }} variant="contained" onClick={() => { handleOpen(index); }}> Cancel Registration </Button>
+                        </div>
                     </div>
 
                     <BootstrapDialog
@@ -163,12 +174,19 @@ setIndex(index);
                                 Are you sure you want to delete the post?
                             </Typography>
                         </DialogContent>
-                        <DialogActions>
+                        <DialogActions
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                paddingBottom: '16px', // Add padding if needed
+                            }}
+                        >
 
                             <Button autofocus className='flex justify-center items-center'
                                 type="submit"
                                 style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {cancelRegistrationHandler();}}> Confirm </Button>
+                                variant="contained" onClick={() => { cancelRegistrationHandler(); }}> Confirm </Button>
 
                             <Button autofocus className='flex justify-center items-center'
                                 type="submit"
@@ -182,11 +200,11 @@ setIndex(index);
                         </DialogActions>
                     </BootstrapDialog>
 
-                    </div>
-                )))}
-            </div>
+                </div>
+            )))}
+        </div>
 
-       
+
     );
 };
 const mapStateToProps = (state) => ({

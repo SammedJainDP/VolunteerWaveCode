@@ -8,7 +8,7 @@ import { AddProfile } from '../Redux/Actions';
 
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-
+import backgroundImage from '../images/bg.jpeg';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 
@@ -17,10 +17,10 @@ import Typography from '@mui/material/Typography';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
+    padding: theme.spacing(1),
   },
 }));
 
@@ -31,29 +31,29 @@ export default function SignUp(props) {
 
   const handleOpen = () => {
 
-      setOpen(true);
-      
+    setOpen(true);
+
   };
 
   const handleClose = () => {
 
-      setOpen(false);
-      
+    setOpen(false);
+
   };
 
   const handleOpen1 = () => {
 
     setOpen1(true);
-    
-};
 
-const handleClose1 = () => {
+  };
+
+  const handleClose1 = () => {
 
     setOpen1(false);
     dispatch(AddProfile(formData));
     navigate('/Login');
-    
-};
+
+  };
 
   const [repasword, setRepasword] = useState('');
 
@@ -98,20 +98,30 @@ const handleClose1 = () => {
 
       handleOpen1();
 
-      
+
       e.preventDefault();
 
       // const updatetedData=[...eventData,formData];
 
-     
-      
+
+
       // Reset the form data after submission
-      
+
     }
   };
   // const logo = `${process.env.PUBLIC_URL}/logo.png`;
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh', // Ensure the background covers the entire viewport
+        // Other styles for your content
+      }}
+    >
       <Header1 />
 
 
@@ -154,73 +164,87 @@ const handleClose1 = () => {
         </div>
       </div>
       <BootstrapDialog
-                        onClose={handleClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={open}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Passwords do not match. Renter the password appropriately.
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Passwords do not match. Renter the password appropriately.
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose(); }}> Okay </Button>
 
-                           
 
-                            {/* <Button autoFocus onClick={handleClose}>
+
+          {/* <Button autoFocus onClick={handleClose}>
             Confirm
           </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
-                    <BootstrapDialog
-                        onClose={handleClose1}
-                        aria-labelledby="customized-dialog-title"
-                        open={open1}
-                        PaperProps={{
-                            sx: {
-                                backgroundColor: '#D5F0F8',
-                                padding: '60px', // Set background color
-                            },
-                        }}
-                    >
+        </DialogActions>
+      </BootstrapDialog>
+      <BootstrapDialog
+        onClose={handleClose1}
+        aria-labelledby="customized-dialog-title"
+        open={open1}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#D5F0F8',
+            padding: '60px', // Set background color
+          },
+        }}
+      >
 
-                        <button className="close-button" onClick={handleClose1}> X</button>
-                        <DialogContent>
+        <button className="close-button" onClick={handleClose1}> X</button>
+        <DialogContent>
 
 
-                            <Typography gutterBottom>
-                                Profile created successfully.
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
+          <Typography gutterBottom>
+            Profile created successfully.
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: '16px', // Add padding if needed
+          }}
+        >
 
-                            <Button autofocus className='flex justify-center items-center'
-                                type="button"
-                                style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
-                                variant="contained" onClick={() => {handleClose1();}}> Okay </Button>
+          <Button autofocus className='flex justify-center items-center'
+            type="button"
+            style={{ color: "black", backgroundColor: "#D3D3D3", fontSize: "15px", fontWeight: "Bold", marginRight: "10px", marginTop: "2px", width: "100px" }}
+            variant="contained" onClick={() => { handleClose1(); }}> Okay </Button>
 
-                           
 
-                            {/* <Button autoFocus onClick={handleClose}>
+
+          {/* <Button autoFocus onClick={handleClose}>
             Confirm
           </Button> */}
-                        </DialogActions>
-                    </BootstrapDialog>
+        </DialogActions>
+      </BootstrapDialog>
     </div>
 
   );
