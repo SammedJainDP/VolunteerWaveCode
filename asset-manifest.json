@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/VolunteerWaveCode/static/css/main.c9ed2619.css",
-    "main.js": "/VolunteerWaveCode/static/js/main.b981b6ab.js",
+    "main.js": "/VolunteerWaveCode/static/js/main.d10db23f.js",
     "static/js/787.16c6ee99.chunk.js": "/VolunteerWaveCode/static/js/787.16c6ee99.chunk.js",
     "static/media/bg.jpeg": "/VolunteerWaveCode/static/media/bg.07ef1ec167b112602f68.jpeg",
     "index.html": "/VolunteerWaveCode/index.html",
     "main.c9ed2619.css.map": "/VolunteerWaveCode/static/css/main.c9ed2619.css.map",
-    "main.b981b6ab.js.map": "/VolunteerWaveCode/static/js/main.b981b6ab.js.map",
+    "main.d10db23f.js.map": "/VolunteerWaveCode/static/js/main.d10db23f.js.map",
     "787.16c6ee99.chunk.js.map": "/VolunteerWaveCode/static/js/787.16c6ee99.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9ed2619.css",
-    "static/js/main.b981b6ab.js"
+    "static/js/main.d10db23f.js"
   ]
 }
