@@ -82,15 +82,25 @@ const VolunteerForm = () => {
    
 
     const ageRange = `${formData.AGE_FROM}-${formData.AGE_TO}`;
+    const timeRange = `${formData.START_TIME}-${formData.END_TIME}`;
 
   // Create a copy of formData, excluding AGE_FROM and AGE_TO
-  const { AGE_FROM, AGE_TO, ...formDataWithoutAges } = formData;
+  const { AGE_FROM, AGE_TO,START_TIME, END_TIME, ...formDataWithoutAges } = formData;
 
   // Update formData with the merged age range
   const updatedFormData = {
     ...formDataWithoutAges,
-    AGE: ageRange
+    AGE: ageRange,
+    TIME_SLOTS: timeRange
   };
+
+
+
+// Create a copy of formData, excluding START_TIME and END_TIME
+
+
+// Update formData with the merged time range
+
 
 
     // const updatetedData=[...eventData,formData];
@@ -163,12 +173,34 @@ const VolunteerForm = () => {
 
                 <label htmlFor="userId">DATE <span style={{ color: "red" }}>*</span></label>
                 <input type="DATE" id="DATE" value={formData.DATE} onChange={handleInputChange1} required />
-
-                <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
+{/* ///////////// */}
+                {/* <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
                 <div>
                   <input type="text" id="TIME_SLOTS" value={formData.TIME_SLOTS} onChange={handleInputChange1} required />
-                  {/* <input style={{width:'100px', fontSize:'12px'}} type="time" id="toTime" value={formData.toTime} onChange={(e) => handleInputChange(e, 'toTime')} /> */}
-                </div>
+                </div> */}
+                {/* ////////////// */}
+
+                <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
+<div>
+  <input
+    type="time"
+    id="START_TIME"
+    value={formData.START_TIME}
+    onChange={handleInputChange1}
+    style={{ width: '78px' }} 
+    required
+  />
+   <span>&nbsp;&nbsp;to</span>
+  <input
+    type="time"
+    id="END_TIME"
+    value={formData.END_TIME}
+    onChange={handleInputChange1}
+    style={{ width: '78px' }} 
+    required
+  />
+</div>
+                {/* /////////////// */}
                
 
                 <label htmlFor="userId">LOCATION <span style={{ color: "red" }}>*</span></label>

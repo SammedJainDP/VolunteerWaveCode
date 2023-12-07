@@ -71,6 +71,9 @@ const EditMyPost = ({ someData }) => {
 const ageString=userData.AGE;
 const [fromAge, toAge] = ageString.split('-').map(Number);
 
+const timeString = "08:00-22:00"; // Replace this with your time string
+const [startTime, endTime] = timeString.split("-");
+
 
 
   const [formData, setFormData] = useState({
@@ -84,6 +87,8 @@ const [fromAge, toAge] = ageString.split('-').map(Number);
     LOCATION: userData.LOCATION,
     AGE_FROM: fromAge,
     AGE_TO: toAge,
+    START_TIME: startTime,
+    END_TIME: endTime,
     DESCRIPTION: userData.DESCRIPTION,
     TEACHING: userData.TEACHING,
     PHYSICAL_REQUIREMENT: userData.PHYSICAL_REQUIREMENT,
@@ -116,15 +121,17 @@ const [fromAge, toAge] = ageString.split('-').map(Number);
   const HandleSubmit = () => {
 
     const ageRange = `${formData.AGE_FROM}-${formData.AGE_TO}`;
+    const timeRange = `${formData.START_TIME}-${formData.END_TIME}`;
 
-    // Create a copy of formData, excluding AGE_FROM and AGE_TO
-    const { AGE_FROM, AGE_TO, ...formDataWithoutAges } = formData;
-  
-    // Update formData with the merged age range
-    const updatedFormData = {
-      ...formDataWithoutAges,
-      AGE: ageRange
-    };
+  // Create a copy of formData, excluding AGE_FROM and AGE_TO
+  const { AGE_FROM, AGE_TO,START_TIME, END_TIME, ...formDataWithoutAges } = formData;
+
+  // Update formData with the merged age range
+  const updatedFormData = {
+    ...formDataWithoutAges,
+    AGE: ageRange,
+    TIME_SLOTS: timeRange
+  };
 
     // const updatetedData=[...eventData,formData];
     dispatch(deletePost(updatedFormData.TITLE));
@@ -167,11 +174,31 @@ const [fromAge, toAge] = ageString.split('-').map(Number);
                 <label htmlFor="userId">DATE <span style={{ color: "red" }}>*</span></label>
                 <input type="DATE" id="DATE" value={formData.DATE} onChange={handleInputChange1} required />
 
-                <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
+                {/* <label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
                 <div>
                   <input type="text" id="TIME_SLOTS" value={formData.TIME_SLOTS} onChange={handleInputChange1} required />
-                  {/* <input style={{width:'100px', fontSize:'12px'}} type="time" id="toTime" value={formData.toTime} onChange={(e) => handleInputChange(e, 'toTime')} /> */}
-                </div>
+                </div> */}
+
+<label htmlFor="password">TIME SLOTS<span style={{ color: "red" }}>*</span></label>
+<div>
+  <input
+    type="time"
+    id="START_TIME"
+    value={formData.START_TIME}
+    onChange={handleInputChange1}
+    style={{ width: '78px' }} 
+    required
+  />
+   <span>&nbsp;&nbsp;to</span>
+  <input
+    type="time"
+    id="END_TIME"
+    value={formData.END_TIME}
+    onChange={handleInputChange1}
+    style={{ width: '78px' }} 
+    required
+  />
+</div>
 
                 <label htmlFor="userId">LOCATION <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="LOCATION" value={formData.LOCATION} onChange={handleInputChange1} required />
