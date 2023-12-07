@@ -43,9 +43,16 @@ const EditMyPost = ({ someData }) => {
 
 
   const handleOpen = (e) => {
+    e.preventDefault();
+    if (formData.AGE_FROM >= formData.AGE_TO || formData.AGE_FROM<=0 || formData.AGE_TO<=0) {
+      // Handle the case where AGE_FROM is greater than or equal to AGE_TO
+      // For example, show an error message or prevent form submission
+      alert("Invalid age entry");
+      return; // Stop further execution
+    }
 
     setOpen(true);
-    e.preventDefault();
+    
   };
 
   const handleClose = () => {
@@ -61,6 +68,10 @@ const EditMyPost = ({ someData }) => {
   const navigate = useNavigate();
   const dateParsed = new Date(userData.DATE);
   const dateString = dateParsed.toISOString().split('T')[0];
+const ageString=userData.AGE;
+const [fromAge, toAge] = ageString.split('-').map(Number);
+
+
 
   const [formData, setFormData] = useState({
 
@@ -71,7 +82,8 @@ const EditMyPost = ({ someData }) => {
     DATE: dateString,
     TIME_SLOTS: userData.TIME_SLOTS,
     LOCATION: userData.LOCATION,
-    AGE: userData.AGE,
+    AGE_FROM: fromAge,
+    AGE_TO: toAge,
     DESCRIPTION: userData.DESCRIPTION,
     TEACHING: userData.TEACHING,
     PHYSICAL_REQUIREMENT: userData.PHYSICAL_REQUIREMENT,
@@ -103,13 +115,22 @@ const EditMyPost = ({ someData }) => {
   };
   const HandleSubmit = () => {
 
+    const ageRange = `${formData.AGE_FROM}-${formData.AGE_TO}`;
 
+    // Create a copy of formData, excluding AGE_FROM and AGE_TO
+    const { AGE_FROM, AGE_TO, ...formDataWithoutAges } = formData;
+  
+    // Update formData with the merged age range
+    const updatedFormData = {
+      ...formDataWithoutAges,
+      AGE: ageRange
+    };
 
     // const updatetedData=[...eventData,formData];
-    dispatch(deletePost(formData.TITLE));
-    dispatch(AddMyPosts(formData));
-    dispatch(deletePostHome(formData.TITLE));
-    dispatch(AddEvent(formData));
+    dispatch(deletePost(updatedFormData.TITLE));
+    dispatch(AddMyPosts(updatedFormData));
+    dispatch(deletePostHome(updatedFormData.TITLE));
+    dispatch(AddEvent(updatedFormData));
 
     navigate('/MyPosts');
     // Reset the form data after submission
@@ -155,11 +176,38 @@ const EditMyPost = ({ someData }) => {
                 <label htmlFor="userId">LOCATION <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="LOCATION" value={formData.LOCATION} onChange={handleInputChange1} required />
 
-                <label htmlFor="password">AGE<span style={{ color: "red" }}>*</span></label>
+
+
+
+{/* /////////// */}
+                {/* <label htmlFor="password">AGE<span style={{ color: "red" }}>*</span></label> */}
                 {/* <div> */}
-                <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required />
+                {/* <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required /> */}
                 {/* <input style={{width:'100px'}} type="number" id="AGE" value={formData.AGE} onChange={mergeAgesAndStore} />  */}
                 {/* </div> */}
+{/* /////////// */}
+<label htmlFor="password">AGE Range<span style={{ color: "red" }}>*</span></label>
+<div style={{ display: 'flex', gap: '5px' }}>
+<input
+    type="number"
+    id="AGE_FROM"
+    value={formData.AGE_FROM}
+    onChange={handleInputChange1}
+    required
+    style={{ width: '73px' }} // Adjust the width as needed
+  />
+  <span>&nbsp;&nbsp;to</span>
+  <input
+    type="number"
+    id="AGE_TO"
+    value={formData.AGE_TO}
+    onChange={handleInputChange1}
+    required
+    style={{ width: '73px' }} // Adjust the width as needed
+  />
+</div>
+
+{/* /////////// */}
 
                 <label htmlFor="userId">DESCRIPTION <span style={{ color: "red" }}>*</span></label>
                 <textarea id="DESCRIPTION" value={formData.DESCRIPTION} onChange={handleInputChange1} />

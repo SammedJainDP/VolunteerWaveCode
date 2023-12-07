@@ -6,7 +6,7 @@ let myEvents = [
       DATE: '10/11/2023',
       TIME_SLOTS: '10:00 AM - 02:00 PM',
       LOCATION: 'CARSON BEACH',
-      AGE: '22 - 65 Yrs',
+      AGE: '22-65',
       DESCRIPTION: 'Need to clean beach and participate in save ocean campaign',
       TEACHING: 'No',
       PHYSICAL_REQUIREMENT: 'Yes',

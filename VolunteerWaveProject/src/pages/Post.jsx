@@ -33,9 +33,16 @@ const VolunteerForm = () => {
 
 
   const handleOpen = (e) => {
+    e.preventDefault();
+    if (formData.AGE_FROM >= formData.AGE_TO || formData.AGE_FROM<=0 || formData.AGE_TO<=0) {
+      // Handle the case where AGE_FROM is greater than or equal to AGE_TO
+      // For example, show an error message or prevent form submission
+      alert("Invalid age entry");
+      return; // Stop further execution
+    }
 
     setOpen(true);
-    e.preventDefault();
+    
   };
 
   const handleClose = () => {
@@ -72,10 +79,23 @@ const VolunteerForm = () => {
 
   const handleSubmit = (e) => {
 
+   
+
+    const ageRange = `${formData.AGE_FROM}-${formData.AGE_TO}`;
+
+  // Create a copy of formData, excluding AGE_FROM and AGE_TO
+  const { AGE_FROM, AGE_TO, ...formDataWithoutAges } = formData;
+
+  // Update formData with the merged age range
+  const updatedFormData = {
+    ...formDataWithoutAges,
+    AGE: ageRange
+  };
+
 
     // const updatetedData=[...eventData,formData];
-    dispatch(AddEvent(formData));
-    dispatch(AddMyPosts(formData));
+    dispatch(AddEvent(updatedFormData));
+    dispatch(AddMyPosts(updatedFormData));
 
     navigate('/Home/null');
     // Reset the form data after submission
@@ -149,15 +169,47 @@ const VolunteerForm = () => {
                   <input type="text" id="TIME_SLOTS" value={formData.TIME_SLOTS} onChange={handleInputChange1} required />
                   {/* <input style={{width:'100px', fontSize:'12px'}} type="time" id="toTime" value={formData.toTime} onChange={(e) => handleInputChange(e, 'toTime')} /> */}
                 </div>
+               
 
                 <label htmlFor="userId">LOCATION <span style={{ color: "red" }}>*</span></label>
                 <input type="text" id="LOCATION" value={formData.LOCATION} onChange={handleInputChange1} required />
 
-                <label htmlFor="password">AGE<span style={{ color: "red" }}>*</span></label>
+ {/* ////////////// */}
+
+                {/* <label htmlFor="password">AGE<span style={{ color: "red" }}>*</span></label> */}
                 {/* <div> */}
-                <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required />
+                {/* <input type="text" id="AGE" value={formData.AGE} onChange={handleInputChange1} required /> */}
                 {/* <input style={{width:'100px'}} type="number" id="AGE" value={formData.AGE} onChange={mergeAgesAndStore} />  */}
                 {/* </div> */}
+
+
+
+{/* ........ */}
+
+
+<label htmlFor="password">AGE Range<span style={{ color: "red" }}>*</span></label>
+<div style={{ display: 'flex', gap: '5px' }}>
+<input
+    type="number"
+    id="AGE_FROM"
+    value={formData.AGE_FROM}
+    onChange={handleInputChange1}
+    required
+    style={{ width: '73px' }} // Adjust the width as needed
+  />
+  <span>&nbsp;&nbsp;to</span>
+  <input
+    type="number"
+    id="AGE_TO"
+    value={formData.AGE_TO}
+    onChange={handleInputChange1}
+    required
+    style={{ width: '73px' }} // Adjust the width as needed
+  />
+</div>
+
+
+{/* ///// */}
 
                 <label htmlFor="userId">DESCRIPTION <span style={{ color: "red" }}>*</span></label>
                 <textarea id="DESCRIPTION" value={formData.DESCRIPTION} onChange={handleInputChange1} required />

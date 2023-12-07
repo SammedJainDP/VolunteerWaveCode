@@ -98,7 +98,7 @@ const MyEvents = ({ events }) => {
             {/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
             <Header2 />
             <div style={{ height: '90px' }}>   </div>
-            <h1 className='flex justify-center' style={{ fontWeight: 'bold', fontSize: '40px', textDecoration: 'None' }}>My Events</h1>
+            <h1 className='flex justify-center' style={{ fontWeight: 'bold', fontSize: '40px', textDecoration: 'None', fontFamily: '"Inter-Bold", Helvetica, sans-serif' }}>My Events</h1>
 
 
             {events.map((userData, index) => (userData && (
