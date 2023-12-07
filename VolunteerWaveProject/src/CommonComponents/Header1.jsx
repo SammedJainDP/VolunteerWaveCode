@@ -17,7 +17,7 @@ const Header1 = () => {
         />
       </div>
       <div className="mx-auto"> {/* This container will hold the text and be pushed to the right */}
-        <h1 className="text-2xl font-bold font-serif" style={customTextColorStyle}>VOLUNTEER WAVE</h1>
+      <h1 className="text-2xl font-bold font-serif" style={{ ...customTextColorStyle, fontFamily: '"Inter-Bold", Helvetica, sans-serif' }}>VOLUNTEER WAVE</h1>
         {/* Add more content here if needed */}
       </div>
     </div>
